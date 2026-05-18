@@ -105,13 +105,12 @@ The architecture evaluates directional vectors by tracking Angular Error in degr
 
 Model performance demonstrates high accuracy and domain generalization on held-out data streams:
 
-=======================================================================================================================================
  IMAGE         | SOURCE FOLDER           | GROUND TRUTH VECTOR (L2-Norm)  | PREDICTED VECTOR (L2-Norm)     | ANGULAR ERROR
-=======================================================================================================================================
+
  frame_0000.jpg| sample_prediction/RGB   | [-0.8632, 0.0711, 0.4998]      | [-0.8349, 0.0527, 0.5479]      | 3.37°
  frame_0001.jpg| sample_prediction/RGB   | [-0.3303, -0.0022, 0.9439]     | [-0.3510, -0.0393, 0.9355]     | 2.48°
  frame_0004.jpg| sample_prediction/RGB   | [-0.8314, 0.0400, 0.5543]      | [-0.8099, 0.0417, 0.5851]      | 2.16°
-=======================================================================================================================================
+
 
 
 
