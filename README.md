@@ -26,7 +26,7 @@ The pixel distance from the measured sphere center (x_c, y_c) is mapped into a n
 
 3.Maps vectors into the PBRT Physical Coordinate System where Right is +X, Up is +Z, and Depth is -Y
 
-4. Assuming standard orthographic or long-lens framing constraints, the View Vector is hard-coded down the negative optical axis: $\mathbf{V} = [0, -1, 0]^T.
+4. Assuming standard orthographic or long-lens framing constraints, the View Vector is hard-coded down the negative optical axis: $\mathbf{V} = [0 , -1, 0]^T.
 
 Outputs: Automatically outputs annotated verification plots showcasing spatial circle bounds alongside an indexed spreadsheet structure containing labeled outputs (light_directions.xlsx).
 
