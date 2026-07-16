@@ -6,7 +6,9 @@ Generates high-fidelity synthetic image datasets with randomized parameters to c
 Core Functionality: Utilizes a custom Python script to orchestrate look-ups, generate random point light locations on a bounded upper hemisphere, apply spatial translations, and execute programmatic rotations around object mesh structures (e.g., Blender Monkey).
 Rendering Engine: Interface links directly to a compiled pbrt.exe (Physically Based Rendering) executable. It dynamically generates .pbrt scene files defining camera matrices (perspective, 50° FOV), advanced sampling algorithms (halton with 64 samples per pixel), unified paths, infinite background illumination bounds, and custom geometry materials.
 
-Ground Truth Log: Outputs labels.csv within the structured project dataset directory containing mapped vectors: [filename, light_x, light_y, light_z, monkey_x, monkey_y, monkey_z, rotation_z].
+Ground Truth Log: Outputs labels.csv within the structured project dataset directory containing mapped vectors: [filename, light_x, light_y, light_z, monkey_x, monkey_y, monkey_z, rotation_z]. 
+
+The purpose of this synthetic data generation is to calibrate the ground truth ligth direction. We generated the shadow mask, depth map of the RGB image in further steps. 
 
 
 <div align="center">
