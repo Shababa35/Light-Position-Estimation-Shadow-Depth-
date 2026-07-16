@@ -8,6 +8,15 @@ Rendering Engine: Interface links directly to a compiled pbrt.exe (Physically Ba
 
 Ground Truth Log: Outputs labels.csv within the structured project dataset directory containing mapped vectors: [filename, light_x, light_y, light_z, monkey_x, monkey_y, monkey_z, rotation_z].
 
+
+<div align="center">
+
+<img src="Synthetic_monkey_RGB.png" width="30%" />
+<img src="Synthetic_monkey_Shadowmask.png" width="30%" />
+<img src="Synthetic_monkey_depth.png" width="30%" />
+
+</div>
+
 2. Chrome Sphere Light Calibration (calculate_light_direction.py)
 Computes precise 3D direction vectors from real-world photograph configurations where light configurations cannot be programmatically tracked.
 
