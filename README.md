@@ -8,7 +8,7 @@ Rendering Engine: Interface links directly to a compiled pbrt.exe (Physically Ba
 
 Ground Truth Log: Outputs labels.csv within the structured project dataset directory containing mapped vectors: [filename, light_x, light_y, light_z, monkey_x, monkey_y, monkey_z, rotation_z]. 
 
-The purpose of this synthetic data generation is to calibrate the ground truth ligth direction. We generated the shadow mask, depth map of the RGB image in further steps. 
+The purpose of this synthetic data generation is to calibrate the ground truth ligth direction. We generated the shadow mask, depth map of the RGB image in further steps using the synthetic dataset to apply the dataset on the learning model. 
 
 
 <div align="center">
