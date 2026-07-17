@@ -1,6 +1,8 @@
 # Light-Position-Estimation-Shadow-Depth-
 In this work we evaluate whether incorporating shadow masks and depth maps improves light direction estimation compared to using RGB images only.
 
+![demo](purpose.png)
+
 1. Synthetic Dataset Synthesis (generate_img.py)
 Generates high-fidelity synthetic image datasets with randomized parameters to create generalizable training data.
 Core Functionality: Utilizes a custom Python script to orchestrate look-ups, generate random point light locations on a bounded upper hemisphere, apply spatial translations, and execute programmatic rotations around object mesh structures (e.g., Blender Monkey).
