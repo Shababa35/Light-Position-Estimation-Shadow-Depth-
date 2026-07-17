@@ -20,7 +20,10 @@ Ground Truth Log: Outputs labels.csv within the structured project dataset direc
 The purpose of this synthetic data generation is to calibrate the ground truth ligth direction. We generated the shadow mask, depth map of the RGB image in further steps using the synthetic dataset to apply the dataset on the learning model. 
 
 2. Shadow mask generation (SHADOW_MASKING.ipynb)
-The file is in google colab version, for local drive please change accordingly. We used DRR & DASA backbone to generate the shadow masking which can detect black objects from actual shadows. We used SBU_model weights. Edit the input path according to your input RGB images. 
+The file is in google colab version, for local drive please change accordingly. We used DRR & DASA backbone to generate the shadow masking which can detect black objects from actual shadows. We used SBU_model weights. Edit the input path according to your input RGB images. We used ShadowDetection2021 github for this application.
+
+3. Depth map generation (Generate_depth.py)
+The file is using DepthAnything V2 to generate depth maps of the RGB images. 
 
 
 <div align="center">
