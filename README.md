@@ -3,6 +3,10 @@ In this work we evaluate whether incorporating shadow masks and depth maps impro
 
 ![demo](purpose.png)
 
+This pipeline takes **multi-modal inputs from the same scene—an RGB image, a depth map, and a shadow mask—and combines them into a single fused tensor** to capture both visual appearance and geometric lighting cues. This fused input is passed through a **ResNet-18 encoder** to extract high-level features, which are then compressed into a compact representation using **global average pooling**. The resulting feature vector is fed into a **multi-layer perceptron (MLP)** that regresses a 3D vector representing the light direction. Finally, **L2 normalization** is applied to ensure the output is a unit vector, producing the **predicted 3D light direction** for the scene.
+
+![demo](pipeline.png)
+
 1. Synthetic Dataset Synthesis (generate_img.py)
 Generates high-fidelity synthetic image datasets with randomized parameters to create generalizable training data.
 Core Functionality: Utilizes a custom Python script to orchestrate look-ups, generate random point light locations on a bounded upper hemisphere, apply spatial translations, and execute programmatic rotations around object mesh structures (e.g., Blender Monkey).
