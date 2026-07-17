@@ -7,6 +7,9 @@ This pipeline takes **multi-modal inputs from the same scene—an RGB image, a d
 
 ![demo](pipeline.png)
 
+For this work we generated synthetic image first to train the model and tested the model with newly generated synthetic data. We used synthetic dataset of 800 images for training. 
+Later on we created 400 real life image dataset to train the model based on the real images. 
+
 1. Synthetic Dataset Synthesis (generate_img.py)
 Generates high-fidelity synthetic image datasets with randomized parameters to create generalizable training data.
 Core Functionality: Utilizes a custom Python script to orchestrate look-ups, generate random point light locations on a bounded upper hemisphere, apply spatial translations, and execute programmatic rotations around object mesh structures (e.g., Blender Monkey).
@@ -16,6 +19,9 @@ Ground Truth Log: Outputs labels.csv within the structured project dataset direc
 
 The purpose of this synthetic data generation is to calibrate the ground truth ligth direction. We generated the shadow mask, depth map of the RGB image in further steps using the synthetic dataset to apply the dataset on the learning model. 
 
+2. Shadow mask generation (SHADOW_MASKING.ipynb)
+The file is in google colab version, for local drive please change accordingly. We used DRR & DASA backbone to generate the shadow masking which can detect black objects from actual shadows. We used SBU_model weights. Edit the input path according to your input RGB images. 
+
 
 <div align="center">
 
@@ -24,6 +30,8 @@ The purpose of this synthetic data generation is to calibrate the ground truth l
 <img src="Synthetic_monkey_depth.png" width="30%" />
 
 </div>
+
+
 
 2. Chrome Sphere Light Calibration (calculate_light_direction.py)
 Computes precise 3D direction vectors from real-world photograph configurations where light configurations cannot be programmatically tracked.
