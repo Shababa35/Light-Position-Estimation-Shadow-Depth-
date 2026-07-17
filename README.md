@@ -37,11 +37,11 @@ The pixel distance from the measured sphere center (x_c, y_c) is mapped into a n
 
 3.Maps vectors into the PBRT Physical Coordinate System where Right is +X, Up is +Z, and Depth is -Y
 
-4. Assuming standard orthographic or long-lens framing constraints, the View Vector is hard-coded down the negative optical axis: $\mathbf{V} = [0 , -1, 0]^T.
+4. Assuming standard orthographic or long-lens framing constraints, the View Vector is hard-coded down the negative optical axis: V = [0 , -1, 0]^T.
 
 Outputs: Automatically outputs annotated verification plots showcasing spatial circle bounds alongside an indexed spreadsheet structure containing labeled outputs (light_directions.xlsx).
 
-3. Multi-Modal Feature Extraction
+5. Multi-Modal Feature Extraction
 To enforce strong physical constraints on illumination vector prediction, raw RGB observations are augmented with extracted geometrical and environmental masks.
 
 
@@ -59,7 +59,7 @@ Post-Processing & Filtering:Implements Otsu thresholding paired with morphologic
 
 Outputs: Generates structured dataset logs containing localized centroids and area metadata mappings (shadow_centroids_updated.csv), alongside automated visual evaluation masks.
 
-4. Deep Multi-Modal Training Architecture (Final_training.ipynb)
+6. Deep Multi-Modal Training Architecture (Final_training.ipynb)
 Integrates all asset streams into a unified regression network capable of generalizing across varied synthetic and physical product categories.
 
 
