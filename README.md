@@ -33,7 +33,7 @@ Image-to-World Coordinate Transformations:
 The script identifies the maximum specularity coordinates (x_h, y_h) inside the Red Channel (img[:, :, 2]) to avoid clipping from saturated channels.
 The pixel distance from the measured sphere center (x_c, y_c) is mapped into a normalized projection space relative to the sphere radius r:
 
-
+![Demo](LightEstimation.gif)
 
 3.Maps vectors into the PBRT Physical Coordinate System where Right is +X, Up is +Z, and Depth is -Y
 
