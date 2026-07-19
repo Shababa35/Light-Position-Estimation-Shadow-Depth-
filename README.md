@@ -22,8 +22,8 @@ The purpose of this synthetic data generation is to calibrate the ground truth l
 2. Shadow mask generation (SHADOW_MASKING.ipynb)
 The file is in google colab version, for local drive please change accordingly. We used DRR & DASA backbone to generate the shadow masking which can detect black objects from actual shadows. We used SBU_model weights. Edit the input path according to your input RGB images. We used ShadowDetection2021 github for this application.
 
-3. Depth map generation (Generate_depth.py)
-The file is using DepthAnything V2 to generate depth maps of the RGB images. 
+3. Monocular Depth Estimation (Generate_depth.py)
+The file is using DepthAnything V2 to generate depth maps of the RGB images. Input your RGB images to get the depth map of the image. 
 
 
 <div align="center">
@@ -34,17 +34,13 @@ The file is using DepthAnything V2 to generate depth maps of the RGB images.
 
 </div>
 
-
-
-2. Chrome Sphere Light Calibration (calculate_light_direction.py)
+4. Chrome Sphere Light Calibration (calculate_light_direction.py)
 Computes precise 3D direction vectors from real-world photograph configurations where light configurations cannot be programmatically tracked.
 
 Physics & Geometrical Framework: By analyzing reflection highlights on a mirror/chrome reference sphere, the light vector L is strictly derived using the Law of Specular Reflection:
 
  L= 2(N.V)N -V
-                                 
-
-Where N represents the localized surface normal vector and V represents the viewing vector directed toward the camera lens system.
+ Where N represents the localized surface normal vector and V represents the viewing vector directed toward the camera lens system.
 
 Image-to-World Coordinate Transformations:
 The script identifies the maximum specularity coordinates (x_h, y_h) inside the Red Channel (img[:, :, 2]) to avoid clipping from saturated channels.
@@ -52,40 +48,30 @@ The pixel distance from the measured sphere center (x_c, y_c) is mapped into a n
 
 ![Demo](LightEstimation.gif)
 
-3.Maps vectors into the PBRT Physical Coordinate System where Right is +X, Up is +Z, and Depth is -Y
+5. Maps vectors into the PBRT Physical Coordinate System where Right is +X, Up is +Z, and Depth is -Y
 
-4. Assuming standard orthographic or long-lens framing constraints, the View Vector is hard-coded down the negative optical axis: V = [0 , -1, 0]^T.
+6. Assuming standard orthographic or long-lens framing constraints, the View Vector is hard-coded down the negative optical axis: V = [0 , -1, 0]^T.
 
 Outputs: Automatically outputs annotated verification plots showcasing spatial circle bounds alongside an indexed spreadsheet structure containing labeled outputs (light_directions.xlsx).
 
-5. Multi-Modal Feature Extraction
+7. Multi-Modal Feature Extraction
 To enforce strong physical constraints on illumination vector prediction, raw RGB observations are augmented with extracted geometrical and environmental masks.
-
-
-A. Monocular Depth Estimation (Generate_depth.py)
-Core Technology: Integrates the state-of-the-art Depth-Anything-V2 foundation framework (vits encoder architecture).
 
 Execution: Iterates over target sub-directories (img_RGB), applies deep encoder feature forward passes, extracts dense continuous depth profiles, map-normalizes values down to standard grayscale ranges (0-255, uint8), and saves matching targets directly to img_Depth.
 
 
-B. Shadow Masking & Centroid Extraction (SHADOW_MASKING_.ipynb)
-Core Technology: Clones a specialized shadow segmentation framework (ShadowDetection2021) loading pre-trained weights (SBU_model.pth). Includes a built-in hotfix mapping architecture to bypass DenseCRF execution dependencies cleanly via mock bypasses.
-
-
-Post-Processing & Filtering:Implements Otsu thresholding paired with morphological Open operations (cv2.MORPH_OPEN) to filter out high-frequency noise.Filters pixel noise contours utilizing structured thresholding constraints Area < 50px.Uses Image Moments to calculate spatial shadow centroid coordinates (c_x, c_y)
-
-Outputs: Generates structured dataset logs containing localized centroids and area metadata mappings (shadow_centroids_updated.csv), alongside automated visual evaluation masks.
-
-6. Deep Multi-Modal Training Architecture (Final_training.ipynb)
+8. Deep Multi-Modal Training Architecture (Final_training.ipynb)
 Integrates all asset streams into a unified regression network capable of generalizing across varied synthetic and physical product categories.
 
 
 [RGB Input (3ch)] --------> [ Modified ResNet18 ] 
-  [Depth Input (1ch)] ------> [ First layer adapted ] ---> [AdaptiveAvgPool] ---> [Fully-Connected Head] ---> [L2 Normalization] ---> Predicted Light Vector (3D)
-  [Shadow Input (1ch)] ----- > [  to accept 5ch   ]
+[Depth Input (1ch)] ------> [ First layer adapted ] ---> [AdaptiveAvgPool] ---> [Fully-Connected Head] ---> [L2 Normalization] ---> Predicted Light Vector (3D)
+[Shadow Input (1ch)] ----- > [  to accept 5ch   ]
+
+  ![demo](pipeline.png)
 
 
-  Network Engineering: Modifies a standard backbone ResNet18 model to handle a 5-channel multimodal input tensor: torch.cat([rgb, depth, shadow], dim=1).
+Network Engineering: Modifies a standard backbone ResNet18 model to handle a 5-channel multimodal input tensor: torch.cat([rgb, depth, shadow], dim=1).
 
 The first convolutional layer (conv1) weight matrices are surgically adapted via a custom parameter injection routine: the first 3 channels inherit pre-trained ImageNet weights, while the 2 remaining geometry channels (depth and shadow mask) are instantiated utilizing Kaiming Normal initialization.
 
